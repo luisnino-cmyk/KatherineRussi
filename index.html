@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiencia Empresarial - Candidatos Presidencia 2026</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            padding: 20px;
+            color: #334155;
+        }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 { color: #1e293b; font-size: 2.5em; margin-bottom: 10px; }
+        h2 { color: #475569; font-size: 1.5em; margin-bottom: 10px; }
+        .subtitle { color: #64748b; font-style: italic; }
+        
+        .selector {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .selector h3 { margin-bottom: 20px; color: #334155; }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        .btn {
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            background: #f1f5f9;
+            color: #64748b;
+        }
+        .btn.active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+        }
+        
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        canvas { max-width: 100%; margin: 20px auto; display: block; }
+        
+        table {
+            width: 100%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        th, td { padding: 15px; text-align: left; }
+        th {
+            background: #1e293b;
+            color: white;
+            font-weight: 600;
+        }
+        tr:nth-child(even) { background: #f8fafc; }
+        tr:hover { background: #f1f5f9; }
+        .color-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        
+        .profiles {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        .profile {
+            border-left: 4px solid;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8fafc;
+        }
+        .profile h4 { margin-bottom: 8px; color: #1e293b; }
+        .profile p { color: #64748b; font-size: 0.95em; }
+        
+        .methodology {
+            background: #1e293b;
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .methodology h3 { margin-bottom: 15px; }
+        .methodology ul { margin-left: 20px; margin-top: 15px; }
+        .methodology li { margin: 10px 0; color: #cbd5e1; }
+        .methodology strong { color: white; }
+        .note { font-size: 0.85em; color: #94a3b8; margin-top: 15px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Experiencia Empresarial</h1>
+            <h2>Candidatos Presidencia Colombia 2026</h2>
+            <p class="subtitle">Análisis basado en: Facturación de empresas, Creación de empresas, Creación de empleo, Creación de productos</p>
+        </div>
+
+        <div class="selector">
+            <h3>Seleccione candidatos para comparar (mínimo 1):</h3>
+            <div class="buttons" id="buttons"></div>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="radarChart" width="600" height="600"></canvas>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Candidato</th>
+                    <th style="text-align: center;">Facturación</th>
+                    <th style="text-align: center;">Creación Empresas</th>
+                    <th style="text-align: center;">Creación Empleo</th>
+                    <th style="text-align: center;">Creación Productos</th>
+                    <th style="text-align: center;">Promedio</th>
+                </tr>
+            </thead>
+            <tbody id="tableBody"></tbody>
+        </table>
+
+        <div class="profiles">
+            <h3 style="margin-bottom: 20px;">Perfil Empresarial de Candidatos Seleccionados</h3>
+            <div id="profiles"></div>
+        </div>
+
+        <div class="methodology">
+            <h3>Metodología de Evaluación</h3>
+            <p>La calificación (0-10) de los 11 candidatos presidenciales se basó en investigación exhaustiva de su trayectoria empresarial:</p>
+            <ul>
+                <li><strong>Facturación de Empresas:</strong> Nivel de ingresos generados por empresas fundadas/dirigidas</li>
+                <li><strong>Creación de Empresas:</strong> Número y relevancia de empresas creadas</li>
+                <li><strong>Creación de Empleo:</strong> Empleos directos e indirectos generados</li>
+                <li><strong>Creación de Productos:</strong> Innovación y desarrollo de productos/servicios nuevos</li>
+            </ul>
+            <p class="note">Nota: Varios candidatos tienen perfil político/académico sin experiencia empresarial significativa, lo que se refleja en calificaciones bajas.</p>
+            <p class="note">Fuente: Investigación basada en hojas de vida, Wikipedia, medios de comunicación y registros públicos. Octubre 2025.</p>
+        </div>
+    </div>
+
+    <script>
+        const candidatos = {
+            'Daniel Quintero': { facturacion: 7, creacion_empresas: 8, creacion_empleo: 7, creacion_productos: 8, color: '#2563eb', descripcion: 'Fundó Intrasoft (2005), empresas tecnológicas. Director iNNpulsa, Valle del Software' },
+            'Miguel Uribe': { facturacion: 8, creacion_empresas: 6, creacion_empleo: 8, creacion_productos: 5, color: '#16a34a', descripcion: 'Presidente Fedecacao, empresario automotriz (Casa Británica)' },
+            'María F. Cabal': { facturacion: 4, creacion_empresas: 5, creacion_empleo: 4, creacion_productos: 3, color: '#f97316', descripcion: 'Fundó Student Travel Center (2003), Presidenta Fundagán. Familia empresarial' },
+            'David Luna': { facturacion: 4, creacion_empresas: 3, creacion_empleo: 6, creacion_productos: 5, color: '#dc2626', descripcion: 'Presidente Alianza In (gremio), MinTIC, políticas digitales empresariales' },
+            'Juan C. Pinzón': { facturacion: 3, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 1, color: '#ca8a04', descripcion: 'Banca privada Citigroup, Asobancaria, más perfil público que empresarial' },
+            'Vicky Dávila': { facturacion: 2, creacion_empresas: 1, creacion_empleo: 3, creacion_productos: 2, color: '#db2777', descripcion: 'Periodista, directora Semana, perfil mediático no empresarial' },
+            'Mauricio Cárdenas': { facturacion: 2, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 2, color: '#9333ea', descripcion: 'Economista académico, Fedesarrollo, sin experiencia empresarial directa' },
+            'Claudia López': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 1, color: '#ea580c', descripcion: 'Periodista, política, sin experiencia empresarial' },
+            'Roy Barreras': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 1, color: '#84cc16', descripcion: 'Médico, político. Sin experiencia empresarial significativa' },
+            'Sergio Fajardo': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 1, creacion_productos: 1, color: '#0891b2', descripcion: 'Matemático, académico, político. Sin experiencia empresarial' },
+            'Carolina Corcho': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 1, creacion_productos: 1, color: '#ec4899', descripcion: 'Médica, exministra de Salud, política. Sin experiencia empresarial' }
+        };
+
+        let selected = ['Daniel Quintero', 'Miguel Uribe', 'María F. Cabal'];
+
+        function init() {
+            createButtons();
+            updateTable();
+            drawRadar();
+            updateProfiles();
+        }
+
+        function createButtons() {
+            const container = document.getElementById('buttons');
+            Object.keys(candidatos).forEach(name => {
+                const btn = document.createElement('button');
+                btn.className = 'btn' + (selected.includes(name) ? ' active' : '');
+                btn.textContent = name;
+                btn.style.backgroundColor = selected.includes(name) ? candidatos[name].color : '';
+                btn.style.color = selected.includes(name) ? 'white' : '';
+                btn.onclick = () => toggleCandidate(name);
+                container.appendChild(btn);
+            });
+        }
+
+        function toggleCandidate(name) {
+            if (selected.includes(name)) {
+                if (selected.length > 1) selected = selected.filter(n => n !== name);
+            } else {
+                selected.push(name);
+            }
+            document.getElementById('buttons').innerHTML = '';
+            createButtons();
+            drawRadar();
+            updateProfiles();
+        }
+
+        function drawRadar() {
+            const canvas = document.getElementById('radarChart');
+            const ctx = canvas.getContext('2d');
+            const width = canvas.width;
+            const height = canvas.height;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const radius = Math.min(width, height) / 2 - 80;
+
+            ctx.clearRect(0, 0, width, height);
+
+            const metrics = ['Facturación\nEmpresas', 'Creación de\nEmpresas', 'Creación de\nEmpleo', 'Creación de\nProductos'];
+            const angles = metrics.map((_, i) => (Math.PI * 2 * i) / metrics.length - Math.PI / 2);
+
+            // Grilla
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            for (let i = 1; i <= 5; i++) {
+                const r = (radius / 5) * i;
+                ctx.beginPath();
+                angles.forEach((angle, idx) => {
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY + r * Math.sin(angle);
+                    if (idx === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                ctx.closePath();
+                ctx.stroke();
+            }
+
+            // Ejes y etiquetas
+            ctx.strokeStyle = '#94a3b8';
+            ctx.fillStyle = '#475569';
+            ctx.font = 'bold 13px sans-serif';
+            ctx.textAlign = 'center';
+            angles.forEach((angle, i) => {
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.lineTo(centerX + radius * Math.cos(angle), centerY + radius * Math.sin(angle));
+                ctx.stroke();
+
+                const labelX = centerX + (radius + 40) * Math.cos(angle);
+                const labelY = centerY + (radius + 40) * Math.sin(angle);
+                const lines = metrics[i].split('\n');
+                lines.forEach((line, j) => {
+                    ctx.fillText(line, labelX, labelY + j * 15);
+                });
+            });
+
+            // Datos
+            const keys = ['facturacion', 'creacion_empresas', 'creacion_empleo', 'creacion_productos'];
+            selected.forEach(name => {
+                const data = candidatos[name];
+                const color = data.color;
+                
+                ctx.strokeStyle = color;
+                ctx.fillStyle = color + '40';
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                
+                angles.forEach((angle, i) => {
+                    const value = data[keys[i]] || 0;
+                    const r = (radius / 10) * value;
+                    const x = centerX + r * Math.cos(angle);
+                    const y = centerY + r * Math.sin(angle);
+                    if (i === 0) ctx.moveTo(x, y);
+                    else ctx.lineTo(x, y);
+                });
+                
+                ctx.closePath();
+                ctx.fill();
+                ctx.stroke();
+            });
+
+            // Leyenda
+            ctx.font = '14px sans-serif';
+            ctx.textAlign = 'left';
+            let legendY = height - 60;
+            selected.forEach(name => {
+                ctx.fillStyle = candidatos[name].color;
+                ctx.fillRect(20, legendY, 15, 15);
+                ctx.fillStyle = '#1e293b';
+                ctx.fillText(name, 45, legendY + 12);
+                legendY += 25;
+            });
+        }
+
+        function updateTable() {
+            const tbody = document.getElementById('tableBody');
+            const sorted = Object.entries(candidatos)
+                .map(([name, data]) => ({
+                    name,
+                    ...data,
+                    avg: ((data.facturacion + data.creacion_empresas + data.creacion_empleo + data.creacion_productos) / 4).toFixed(1)
+                }))
+                .sort((a, b) => b.avg - a.avg);
+
+            sorted.forEach(cand => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><span class="color-dot" style="background:${cand.color}"></span><strong>${cand.name}</strong></td>
+                    <td style="text-align:center">${cand.facturacion}/10</td>
+                    <td style="text-align:center">${cand.creacion_empresas}/10</td>
+                    <td style="text-align:center">${cand.creacion_empleo}/10</td>
+                    <td style="text-align:center">${cand.creacion_productos}/10</td>
+                    <td style="text-align:center"><strong>${cand.avg}/10</strong></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function updateProfiles() {
+            const container = document.getElementById('profiles');
+            container.innerHTML = '';
+            selected.forEach(name => {
+                const data = candidatos[name];
+                const div = document.createElement('div');
+                div.className = 'profile';
+                div.style.borderColor = data.color;
+                div.innerHTML = `<h4>${name}</h4><p>${data.descripcion}</p>`;
+                container.appendChild(div);
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
