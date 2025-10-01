@@ -154,7 +154,7 @@
 
         <div class="methodology">
             <h3>Metodología de Evaluación</h3>
-            <p>La calificación (0-10) de los 11 candidatos presidenciales se basó en investigación exhaustiva de su trayectoria empresarial:</p>
+            <p>La calificación (0-10) de los 12 candidatos presidenciales se basó en investigación exhaustiva de su trayectoria empresarial:</p>
             <ul>
                 <li><strong>Facturación de Empresas:</strong> Nivel de ingresos generados por empresas fundadas/dirigidas</li>
                 <li><strong>Creación de Empresas:</strong> Número y relevancia de empresas creadas</li>
@@ -168,20 +168,105 @@
 
     <script>
         const candidatos = {
-            'Daniel Quintero': { facturacion: 7, creacion_empresas: 8, creacion_empleo: 7, creacion_productos: 8, color: '#2563eb', descripcion: 'Fundó Intrasoft (2005), empresas tecnológicas. Director iNNpulsa, Valle del Software' },
-            'Miguel Uribe': { facturacion: 8, creacion_empresas: 6, creacion_empleo: 8, creacion_productos: 5, color: '#16a34a', descripcion: 'Presidente Fedecacao, empresario automotriz (Casa Británica)' },
-            'María F. Cabal': { facturacion: 4, creacion_empresas: 5, creacion_empleo: 4, creacion_productos: 3, color: '#f97316', descripcion: 'Fundó Student Travel Center (2003), Presidenta Fundagán. Familia empresarial' },
-            'David Luna': { facturacion: 4, creacion_empresas: 3, creacion_empleo: 6, creacion_productos: 5, color: '#dc2626', descripcion: 'Presidente Alianza In (gremio), MinTIC, políticas digitales empresariales' },
-            'Juan C. Pinzón': { facturacion: 3, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 1, color: '#ca8a04', descripcion: 'Banca privada Citigroup, Asobancaria, más perfil público que empresarial' },
-            'Vicky Dávila': { facturacion: 2, creacion_empresas: 1, creacion_empleo: 3, creacion_productos: 2, color: '#db2777', descripcion: 'Periodista, directora Semana, perfil mediático no empresarial' },
-            'Mauricio Cárdenas': { facturacion: 2, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 2, color: '#9333ea', descripcion: 'Economista académico, Fedesarrollo, sin experiencia empresarial directa' },
-            'Claudia López': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 1, color: '#ea580c', descripcion: 'Periodista, política, sin experiencia empresarial' },
-            'Roy Barreras': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 2, creacion_productos: 1, color: '#84cc16', descripcion: 'Médico, político. Sin experiencia empresarial significativa' },
-            'Sergio Fajardo': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 1, creacion_productos: 1, color: '#0891b2', descripcion: 'Matemático, académico, político. Sin experiencia empresarial' },
-            'Carolina Corcho': { facturacion: 1, creacion_empresas: 1, creacion_empleo: 1, creacion_productos: 1, color: '#ec4899', descripcion: 'Médica, exministra de Salud, política. Sin experiencia empresarial' }
+            'Abelardo de la Espriella': { 
+                facturacion: 8, 
+                creacion_empresas: 7, 
+                creacion_empleo: 8, 
+                creacion_productos: 8, 
+                color: '#8b5cf6', 
+                descripcion: 'Fundó De La Espriella Lawyers (2002, ~100 abogados), licores (Ron Defensor, Vino Fratellone), moda de lujo, inmobiliaria. 4 sectores' 
+            },
+            'Daniel Quintero': { 
+                facturacion: 7, 
+                creacion_empresas: 8, 
+                creacion_empleo: 7, 
+                creacion_productos: 8, 
+                color: '#2563eb', 
+                descripcion: 'Fundó Intrasoft (2005), empresas tecnológicas. Director iNNpulsa, Valle del Software' 
+            },
+            'Miguel Uribe Londoño': { 
+                facturacion: 8, 
+                creacion_empresas: 6, 
+                creacion_empleo: 8, 
+                creacion_productos: 5, 
+                color: '#16a34a', 
+                descripcion: 'Presidente Fedecacao, empresario automotriz (Casa Británica, 60 años)' 
+            },
+            'María F. Cabal': { 
+                facturacion: 4, 
+                creacion_empresas: 5, 
+                creacion_empleo: 4, 
+                creacion_productos: 3, 
+                color: '#f97316', 
+                descripcion: 'Fundó Student Travel Center (2003), Presidenta Fundagán. Familia empresarial' 
+            },
+            'David Luna': { 
+                facturacion: 4, 
+                creacion_empresas: 3, 
+                creacion_empleo: 6, 
+                creacion_productos: 5, 
+                color: '#dc2626', 
+                descripcion: 'Presidente Alianza In (gremio), MinTIC, políticas digitales empresariales' 
+            },
+            'Juan C. Pinzón': { 
+                facturacion: 3, 
+                creacion_empresas: 1, 
+                creacion_empleo: 2, 
+                creacion_productos: 1, 
+                color: '#ca8a04', 
+                descripcion: 'Banca privada Citigroup, Asobancaria, más perfil público que empresarial' 
+            },
+            'Vicky Dávila': { 
+                facturacion: 2, 
+                creacion_empresas: 1, 
+                creacion_empleo: 3, 
+                creacion_productos: 2, 
+                color: '#db2777', 
+                descripcion: 'Periodista, directora Semana, perfil mediático no empresarial' 
+            },
+            'Mauricio Cárdenas': { 
+                facturacion: 2, 
+                creacion_empresas: 1, 
+                creacion_empleo: 2, 
+                creacion_productos: 2, 
+                color: '#9333ea', 
+                descripcion: 'Economista académico, Fedesarrollo, sin experiencia empresarial directa' 
+            },
+            'Claudia López': { 
+                facturacion: 1, 
+                creacion_empresas: 1, 
+                creacion_empleo: 2, 
+                creacion_productos: 1, 
+                color: '#ea580c', 
+                descripcion: 'Periodista, política, sin experiencia empresarial' 
+            },
+            'Roy Barreras': { 
+                facturacion: 1, 
+                creacion_empresas: 1, 
+                creacion_empleo: 2, 
+                creacion_productos: 1, 
+                color: '#84cc16', 
+                descripcion: 'Médico, político. Sin experiencia empresarial significativa' 
+            },
+            'Sergio Fajardo': { 
+                facturacion: 1, 
+                creacion_empresas: 1, 
+                creacion_empleo: 1, 
+                creacion_productos: 1, 
+                color: '#0891b2', 
+                descripcion: 'Matemático, académico, político. Sin experiencia empresarial' 
+            },
+            'Carolina Corcho': { 
+                facturacion: 1, 
+                creacion_empresas: 1, 
+                creacion_empleo: 1, 
+                creacion_productos: 1, 
+                color: '#ec4899', 
+                descripcion: 'Médica, exministra de Salud, política. Sin experiencia empresarial' 
+            }
         };
 
-        let selected = ['Daniel Quintero', 'Miguel Uribe', 'María F. Cabal'];
+        let selected = ['Abelardo de la Espriella', 'Daniel Quintero', 'Miguel Uribe Londoño'];
 
         function init() {
             createButtons();
@@ -229,7 +314,6 @@
             const metrics = ['Facturación\nEmpresas', 'Creación de\nEmpresas', 'Creación de\nEmpleo', 'Creación de\nProductos'];
             const angles = metrics.map((_, i) => (Math.PI * 2 * i) / metrics.length - Math.PI / 2);
 
-            // Grilla
             ctx.strokeStyle = '#cbd5e1';
             ctx.lineWidth = 1;
             for (let i = 1; i <= 5; i++) {
@@ -245,7 +329,6 @@
                 ctx.stroke();
             }
 
-            // Ejes y etiquetas
             ctx.strokeStyle = '#94a3b8';
             ctx.fillStyle = '#475569';
             ctx.font = 'bold 13px sans-serif';
@@ -264,7 +347,6 @@
                 });
             });
 
-            // Datos
             const keys = ['facturacion', 'creacion_empresas', 'creacion_empleo', 'creacion_productos'];
             selected.forEach(name => {
                 const data = candidatos[name];
@@ -289,7 +371,6 @@
                 ctx.stroke();
             });
 
-            // Leyenda
             ctx.font = '14px sans-serif';
             ctx.textAlign = 'left';
             let legendY = height - 60;
